@@ -1,0 +1,68 @@
+
+* Inspecting and Manipulating Text Data with Unix Tools
+GCA_002204515.1_AaegL5.0_genomic.fna
+GCA_002204515.1_AaegL5.0_genomic.gff
+
+* Inspecting Data with Head and Tail
+##gff-version 3
+#!gff-spec-version 1.21
+#!processor NCBI annotwriter
+#!genome-build AaegL5.0
+#!genome-build-accession NCBI_Assembly:GCA_002204515.1
+##sequence-region CM008043.1 1 310827022
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7159
+CM008043.1	Genbank	region	1	310827022	.	+	.	ID=CM008043.1:1..310827022;Dbxref=taxon:7159;Name=1;chromosome=1;dev-stage=pupal;gbkey=Src;genome=chromosome;isolation-source=sample from 80 male siblings;mol_type=genomic DNA;sex=male;strain=LVP_AGWG;tissue-type=whole pupae
+##sequence-region CM008044.1 1 474425716
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=7159
+MF194022.1	Genbank	tRNA	16677	16745	.	-	.	ID=rna-MF194022.1:16677..16745;gbkey=tRNA;product=tRNA-Gln
+MF194022.1	Genbank	exon	16677	16745	.	-	.	ID=exon-MF194022.1:16677..16745-1;Parent=rna-MF194022.1:16677..16745;gbkey=tRNA;product=tRNA-Gln
+###
+
+* Using grep, cut, sort, uniq to summarize columns of data
+6534 region
+  25 exon
+  23 tRNA
+  13 gene
+  13 CDS
+   2 rRNA
+    6534
+   13074
+6534
+13074
+CM008043.1	Genbank	region	1	310827022	.	+	.	ID=CM008043.1:1..310827022;Dbxref=taxon:7159;Name=1;chromosome=1;dev-stage=pupal;gbkey=Src;genome=chromosome;isolation-source=sample from 80 male siblings;mol_type=genomic DNA;sex=male;strain=LVP_AGWG;tissue-type=whole pupae
+CM008044.1	Genbank	region	1	474425716	.	+	.	ID=CM008044.1:1..474425716;Dbxref=taxon:7159;Name=2;chromosome=2;dev-stage=pupal;gbkey=Src;genome=chromosome;isolation-source=sample from 80 male siblings;mol_type=genomic DNA;sex=male;strain=LVP_AGWG;tissue-type=whole pupae
+CM008045.1	Genbank	region	1	409777670	.	+	.	ID=CM008045.1:1..409777670;Dbxref=taxon:7159;Name=3;chromosome=3;dev-stage=pupal;gbkey=Src;genome=chromosome;isolation-source=sample from 80 male siblings;mol_type=genomic DNA;sex=male;strain=LVP_AGWG;tissue-type=whole pupae
+CM008043.1	1	310827022
+CM008044.1	1	474425716
+CM008045.1	1	409777670
+
+* Using grep, cut, sort, uniq to summarize columns of data
+6534 region
+  25 exon
+  23 tRNA
+  13 gene
+  13 CDS
+   2 rRNA
+6534 region	+
+  14 tRNA	+
+  14 exon	+
+  11 exon	-
+   9 tRNA	-
+   9 gene	+
+   9 CDS	+
+   4 gene	-
+   4 CDS	-
+   2 rRNA	-
+   1 product=12S ribosomal RNA
+   1 product=16S ribosomal RNA
+1742	MF194022.1	Genbank	CDS	6213	7955	.	-	0	ID=cds-ARW59271.1;Parent=gene-ND5;Dbxref=NCBI_GP:ARW59271.1;Name=ARW59271.1;gbkey=CDS;gene=ND5;product=NADH dehydrogenase subunit 5;protein_id=ARW59271.1;transl_table=5
+total 3705872
+drwxr-xr-x  3 masashiwakita  staff    96B Dec 21 23:19 2020-12-19
+drwxr-xr-x  2 masashiwakita  staff    64B Dec 22 12:52 2020-12-22
+-rw-r--r--  1 masashiwakita  staff   1.8G Jan 10  2018 GCA_002204515.1_AaegL5.0_genomic.fna
+-rw-r--r--  1 masashiwakita  staff   2.2M Jul 10  2019 GCA_002204515.1_AaegL5.0_genomic.gff
+-rwxr-xr-x  1 masashiwakita  staff   4.1K Mar 25  2020 md5checksums.txt
+ 23393159 GCA_002204515.1_AaegL5.0_genomic.fna
+   19684 GCA_002204515.1_AaegL5.0_genomic.gff
+      40 md5checksums.txt
+ 23412883 total

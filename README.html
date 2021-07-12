@@ -1,0 +1,147 @@
+<p>Masashi Wakita<br />
+Last Update: 2020-12-19</p>
+<hr />
+<h1 id="aedes-aegypti-yellow-fever-mosquito-genome-project"><em>Aedes aegypti</em> (yellow fever mosquito) genome project</h1>
+<p>Project started 2020-12-19.</p>
+<p>A complete genome of <em>Aedes aegypti</em> K-12 was retrieved from the NCBI FTP site. Unix tools (grep, cut, sort and uniq) were used to assess genome sequence features.</p>
+<ul>
+<li><a href="#project-directory-structures">project directory structures</a></li>
+<li><a href="#scripts">scripts</a></li>
+<li><a href="#data">data</a></li>
+<li><a href="#analysis">analysis</a></li>
+<li><a href="#reproducibility">reproducibility</a></li>
+<li><a href="#references">references</a></li>
+</ul>
+<hr />
+<h2 id="project-directory-structures">project directory structures</h2>
+<pre><code>$find mosquito -type f | sort
+mosquito/README.md
+mosquito/README.md.html
+mosquito/analysis/2020-12-19/output.txt
+mosquito/analysis/output.txt
+mosquito/data/README.md
+mosquito/data/README.md.html
+mosquito/data/md5checksums.txt
+mosquito/log.2020-12-19.txt
+mosquito/log2.2020-12-19.txt
+mosquito/scripts/run.sh
+mosquito/scripts/run_all.sh
+mosquito/scripts/run_data_downloader.sh
+mosquito/scripts/run_data_inspector.sh
+mosquito/scripts/run_data_inspector2.sh
+(訂正:以前の課題7ではREADMEの記載がecoliのままになっていました)
+
+2)windows for ubuntu
+find mosquito -type f | sort
+mosquito/.DS_Store
+mosquito/README.md
+mosquito/README.md.html
+mosquito/analysis/.DS_Store
+mosquito/analysis/2020-12-19/output.txt
+mosquito/analysis/2020-12-21/output.txt
+mosquito/analysis/2020-12-22/output.txt
+mosquito/analysis/2020-12-22new/output.txt
+mosquito/analysis/output.txt
+mosquito/data/.DS_Store
+mosquito/data/2020-12-19/.DS_Store
+mosquito/data/README.md
+mosquito/data/README.md.html
+mosquito/data/md5checksums.txt
+mosquito/log.2020-12-19.txt
+mosquito/log2.2020-12-19.txt
+mosquito/scripts/.DS_Store
+mosquito/scripts/run.sh
+mosquito/scripts/run_all.sh
+mosquito/scripts/run_data_downloader.sh
+mosquito/scripts/run_data_inspector.sh
+mosquito/scripts/run_data_inspector2.sh
+mosquito/scripts/run_linux.sh</code></pre>
+<hr />
+<h2 id="scripts">scripts</h2>
+<p>The shell script <code>scripts/run.sh</code> <code>scripts/run_all.sh</code> automatically carries out the entire steps: creating directories, downloading data, and inspecting data.</p>
+<p>Let’s run the shell script <code>scripts/run.sh</code> <code>scripts/run_all.sh</code> in the project’s main directory with:</p>
+<pre><code>1)
+(bash scripts/run.sh &amp;) &gt;&amp; log.$(date +%F).txt
+(bash scripts/run_all.sh &amp;) &gt;&amp; log.$(date +%F).txt
+
+2)
+ubuntu(Linux)では、コマンドが上手く実行できなかったので、そのまま
+sudo bash scripts/run_linux.sh を実行して出力されたものをログとしてコピーし、保存しました。</code></pre>
+<hr />
+<h2 id="data">data</h2>
+<p>Aedes aegypti strain LVP_AGWG mitochondrion, Complete Genome (GCA_002204515.1) data were downloaded on 2020-12-19 &amp; 2020-12-22 into <code>data/</code></p>
+<h3 id="md5-checksum">MD5 checksum</h3>
+<pre><code>MD5 (GCA_002204515.1_AaegL5.0_genomic.fna.gz) = 853cb1a819ff62512abface64f61c91a
+MD5 (GCA_002204515.1_AaegL5.0_genomic.gff.gz) = 6aa4dc30a05269eda2e9b6ff6c7b213c</code></pre>
+<hr />
+<h2 id="analysis">analysis</h2>
+<p>Unix tools (grep, cut, sort and uniq) were used to print FASTA header lines (begin with <code>&gt;</code> in .fna) and count how many of each feature (column 3 in .gff).</p>
+<pre><code>1)my mac
+$cat analysis/2020-12-19/output.txt
+
+&gt;MF194022.1 Aedes aegypti strain LVP_AGWG mitochondrion, complete genome
+  13 CDS
+  25 exon
+  13 gene
+   2 rRNA
+6534 region
+  23 tRNA
+
+2) windows for ubuntu
+$cat analysis/2020-12-22/output.txt
+
+&gt;MF194022.1 Aedes aegypti strain LVP_AGWG mitochondrion, complete genome
+  13 CDS
+  25 exon
+  13 gene
+   2 rRNA
+6534 region
+  23 tRNA
+</code></pre>
+<p>There were 13 CDS, 2 tRNA and 23 rRNA genes in Aedes aegypti strain LVP_AGWG mitochondrion, complete genome. Similar results were reported by <a href="https://core.ac.uk/reader/230834810">高橋純一 et al. (2017)</a>. <a href="https://peerj.com/articles/6131/graphical-abstract.pdf">Arge bella Wei et al. (2018)</a> stated that “species exposed to selection for rapid growth have more rRNA operons, more tRNA genes and more strongly selected codon usage bias.” ニホンミツバチやミフシハバチのゲノムが類似していると判明した。これは複眼を持つ蚊とハチの生物種的に家系図が近接していることが考えられる。</p>
+<hr />
+<h2 id="reproducibility">reproducibility</h2>
+<p>This workflow is fully reproducible. I confirmed that this workflow run on different machines yielded the same outcome using:</p>
+<pre><code>1)my mac
+diff analysis/2020-12-19/output.txt analysis/2020-12-21/output.txt
+
+2)windows for ubuntu
+diff analysis/2020-12-22/output.txt analysis/2020-12-22new/output.txt</code></pre>
+<h3 id="environments">environments</h3>
+<p>Print operating system characteristics using:</p>
+<pre><code>uname -a
+sw_vers
+
+1)
+Darwin masa.local 18.7.0 Darwin Kernel Version 18.7.0: Mon Aug 31 20:53:32 PDT 2020; root:xnu-4903.278.44~1/RELEASE_X86_64 x86_64
+ProductName:    Mac OS X
+ProductVersion: 10.14.6
+BuildVersion:   18G6032
+
+uname -a
+cat /etc/lsb-release
+
+2)
+Linux fyirika 4.4.0-19041-Microsoft #488-Microsoft Mon Sep 01 13:43:00 PST 2020 x86_64 x86_64 x86_64 GNU/Linux
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=20.04
+DISTRIB_CODENAME=focal
+DISTRIB_DESCRIPTION=&quot;Ubuntu 20.04.1 LTS&quot;
+
+
+</code></pre>
+<hr />
+<h2 id="references">references</h2>
+<ul>
+<li><a href="https://github.com/haruosuz/introBI/tree/master/2020">DATA SCIENCE FOR BIOINFORMATICS [DS2] 2020</a>
+<ul>
+<li><p><a href="https://github.com/haruosuz/introBI/blob/master/2020/CaseStudy.md#ncbi-genome-list">NCBI Genome List</a></p></li>
+<li><p><a href="https://github.com/haruosuz/introBI/tree/master/2020#using-pandoc-to-render-markdown-to-html">Using Pandoc to Render Markdown to HTML</a></p>
+<pre><code>FILE=README.md
+pandoc --from markdown --to html ${FILE} &gt; ${FILE}.html</code></pre></li>
+</ul></li>
+<li><a href="https://core.ac.uk/reader/230834810">高橋純一 et al. (2017) ニホンミツバチの遺伝子</a>
+<ul>
+<li><a href="https://peerj.com/articles/6131/graphical-abstract.pdf">Arge bella Wei et al. (2018) ミフシハバチの遺伝子</a></li>
+</ul></li>
+</ul>
