@@ -80,7 +80,7 @@ DEFINITION  Ladona fulva isolate sampled in the wild unplaced genomic scaffold
 <p>　あとLinuxはmacのようにmd5コマンドじゃなくてmd5sumコマンドにしないと、動かないことに注意。</p>
 <p>　Windowsはグループポリシーとかあって権限の仕組みがややこしい。セキュリティタブが表示されないのもよくわからない。</p>
 <p>　mountコマンド(Sudo umount /mnt/c Sudo mount -t drvfs C: /mnt/c -o metadata)等で、もしかしたらまずい所をいじったかとは思ったが、WindowsOSでは読み書き専用の設定を自由に変えられた為、UbuntuOS内にあるファイルだけでこの環境設定は構成されているはず。 　読み取り専用フォルダは、AdministratorsとかUsersとか　その権限の解除が上記のアプリで行ったが、うまく反映されなかった為、結局編集はmacで行った。</p>
-<p>　chmodを使って、Linuxの読み書き制限が数字の1と2と4による足し算で組み立てられていて、sudo chmod 777とかやればいい事を理解し、そういうのを学べたことが卒論でのラズパイでのImageJ構築に活きると思い、為になった。</p>
+<p>　chmodを使って、Linuxの読み書き制限が数字の1と2と4による足し算で組み立てられていて、sudo chmod 777とかやればいい事を理解し、そういうのを学べたことが卒論に活きると思い、為になった。</p>
 <hr />
 <h2 id="project-directory-structures">project directory structures</h2>
 <pre><code>$find mosquito -type f | sort (今回の詳細版による改定によって)(.DS_StoreはMacOS関係のものである為、気にしなくて良い。WindowsOSに一度移した所から、表示されるようになった。)
